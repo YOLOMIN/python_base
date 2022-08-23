@@ -1,0 +1,16 @@
+{% extends "learning_logs/base.html" %}  <!--继承bast.html-->
+{% block content%}                      <!--定义content块，不是从父模板继承的内容都包含在content块中-->
+<p>Topics:{{ topic }}</p>
+<p>Entries:</p>
+<ul>
+
+    {% for entry in entries %}
+        <li>
+            <p>{{ entry.date_added| date:'M d,Y H:i' }} </p>
+            <p>{{ entry.text|linebreaks }}</p>
+        </li>
+    {% empty %}
+    <li> There are no entries for this topic yet. </li>
+    {% endfor %}
+</ul>
+{% endblock content %}
