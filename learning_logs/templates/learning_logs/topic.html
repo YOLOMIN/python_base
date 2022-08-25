@@ -1,7 +1,10 @@
 {% extends "learning_logs/base.html" %}  <!--继承bast.html-->
-{% block content%}                      <!--定义content块，不是从父模板继承的内容都包含在content块中-->
+{% block content %}                      <!--定义content块，不是从父模板继承的内容都包含在content块中-->
 <p>Topics:{{ topic }}</p>
 <p>Entries:</p>
+<p>
+    <a href="{% url 'learning_logs:new_entry' topic.id %}">Add new topic</a>
+</p>
 <ul>
 
     {% for entry in entries %}
