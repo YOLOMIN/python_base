@@ -3,6 +3,7 @@ from django.shortcuts import render,redirect
 
 from .models import Topic                               #导入所需数据相关联的模型
 from .forms import TopicForm
+from .forms import TopicForm,Entry
 from .forms import TopicForm,EntryForm
 # Create your views here.
 def index(request):
@@ -12,7 +13,7 @@ def index(request):
 def topics(request):                                    #Django从服务器哪里收到requst对象
     # 显示所有的主题
     topics = Topic.objects.order_by('date_added')       #查询数据库--请求Topic对象，并根据属性date_added进行排序
-    context = {'topics':topics}                         #定义一个将发送给模型的上下文
+    context = {'topics':topics}                         #定义一个将发送给模型learning_logs/topics.htm的上下文
     return render(request,'learning_logs/topics.html',context)
 
 def topic(request,topic_id):
@@ -57,3 +58,20 @@ def new_entry(request,topic_id):
     #显示空表单或指出表单数据无效
     context = {'topic':topic,'form':form}
     return render(request,'learning_logs/new_entry.html',context)
+
+def edit_entry(request,entry_id):
+    """编辑既有条目"""
+    entry = Entry.objects.get(id=entry_id)     #获取用户要修改的条目对象以及相关联的主题
+    topic = entry.topic
+
+    if request.method != 'POST':
+        #初次请求：使用当前条目填充表单
+        form = EntryForm(instance=entry)        #使用实参instance=entry创建一个EntryForm实例
+    else:
+        #POST 提交的数据：对数据进行处理
+        form = EntryForm(instance=entry,data=request.POST)          #传递实参instance=entry和data=request.POST,让Django根据既有条目对象创建一个表单实例，并根据request.POST中的相关数据对其进行修改
+        if form.is_valid():                     #检查表单是否有效，
+            form.save()
+            return redirect('learning_logs:topic',topic_id=topic.id)    #重定向到显示条目所属主题的页面，用户将在其中看到其编辑的条目 的新版本
+    context = {'entry':entry,'topic':topic,'form':form}
+    return render(request,'learning_logs/edit_entry.html',context)

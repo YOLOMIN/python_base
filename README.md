@@ -13,16 +13,14 @@ $ python3 -m venv 11_env
 如果提示网络不可达，则可以指定源安装
 (11_env) [lss@lss-pc Django]$ pip install django -i https://pypi.mirrors.ustc.edu.cn/simple/
 
-
-
-在Django中创建项目
+在Django中创建项目：
 (11_env) [lss@lss-pc ~]$ django-admin startproject learning_log .
 
-创建数据库
+创建数据库:
 (11_env) [lss@lss-pc ~]$ python3 manage.py migrate
 
 
-查看项目：
+查看项目：---运行项目
 (11_env) [lss@lss-pc ~]$ python3 manage.py runserver
 
 
