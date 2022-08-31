@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-
+from django.contrib.auth.decorators import login_required
 
 from .models import Topic                               #导入所需数据相关联的模型
 from .forms import TopicForm
@@ -10,12 +10,14 @@ def index(request):
     # 学习笔记的主页
     return render(request,'learning_logs/index.html')
 
+@login_required         #限制访问显示所有主题的页面-----检查用户是否已登录，仅当用户已登录时，Django才运行topics的代码
 def topics(request):                                    #Django从服务器哪里收到requst对象
     # 显示所有的主题
     topics = Topic.objects.order_by('date_added')       #查询数据库--请求Topic对象，并根据属性date_added进行排序
     context = {'topics':topics}                         #定义一个将发送给模型learning_logs/topics.htm的上下文
     return render(request,'learning_logs/topics.html',context)
 
+@login_required
 def topic(request,topic_id):
     # 显示单个主题及其所有的条目
     topic = Topic.objects.get(id=topic_id)
@@ -23,6 +25,7 @@ def topic(request,topic_id):
     context = {'topic':topic,'entries':entries}
     return render(request,'learning_logs/topic.html',context)
 
+@login_required
 def new_topic(request):
     #添加新主题
     if request.method != 'POST':            #如果请求不是POST，请求就是GET需要返回一个空表单
@@ -39,6 +42,7 @@ def new_topic(request):
     context = {'form':form}
     return render(request,'learning_logs/new_topic.html',context)
 
+@login_required
 def new_entry(request,topic_id):
     # 在特定主题中添加新条目
     topic = Topic.objects.get(id=topic_id)
