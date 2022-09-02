@@ -13,7 +13,7 @@ def index(request):
 @login_required         #限制访问显示所有主题的页面-----检查用户是否已登录，仅当用户已登录时，Django才运行topics的代码
 def topics(request):                                    #Django从服务器哪里收到requst对象
     # 显示所有的主题
-    topics = Topic.objects.order_by('date_added')       #查询数据库--请求Topic对象，并根据属性date_added进行排序
+    topics = Topic.objects.filter(owner=request.user).order_by('date_added')       #查询数据库--请求Topic对象，并根据属性date_added进行排序
     context = {'topics':topics}                         #定义一个将发送给模型learning_logs/topics.htm的上下文
     return render(request,'learning_logs/topics.html',context)
 
