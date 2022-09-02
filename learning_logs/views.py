@@ -5,6 +5,7 @@ from .models import Topic                               #导入所需数据相�
 from .forms import TopicForm
 from .forms import TopicForm,Entry
 from .forms import TopicForm,EntryForm
+from django.http import Http404
 # Create your views here.
 def index(request):
     # 学习笔记的主页
@@ -21,6 +22,11 @@ def topics(request):                                    #Django从服务器哪�
 def topic(request,topic_id):
     # 显示单个主题及其所有的条目
     topic = Topic.objects.get(id=topic_id)
+
+    #确认请求的主题属于当前用户
+    if topic.owner != request.user:
+        raise Http404
+
     entries = topic.entry_set.order_by('-date_added')
     context = {'topic':topic,'entries':entries}
     return render(request,'learning_logs/topic.html',context)
