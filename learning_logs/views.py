@@ -74,6 +74,10 @@ def edit_entry(request,entry_id):
     entry = Entry.objects.get(id=entry_id)     #获取用户要修改的条目对象以及相关联的主题
     topic = entry.topic
 
+    #保护页面edit_entry
+    if topic.owner != request.user:
+        raise Http404
+
     if request.method != 'POST':
         #初次请求：使用当前条目填充表单
         form = EntryForm(instance=entry)        #使用实参instance=entry创建一个EntryForm实例
