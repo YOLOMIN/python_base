@@ -1,18 +1,28 @@
 {%extends "learning_logs/base.html" %}  <!--继承bast.html-->
+
+{% block page_header %}
+    <h1>Topics</h1>
+{% endblock page_header %}
 {% block content%}                      <!--定义content块，不是从父模板继承的内容都包含在content块中-->
-<p>Topics</p>
+
 <ul>
     {%for topic in topics %}
     <!-- <li>{{ topic}}</li> -->
     <li>
-    <a href="{% url 'learning_logs:topic' topic.id %}">{{ topic }}</a>
+        <h3>
+            <a href="{% url 'learning_logs:topic' topic.id %}">{{ topic }}</a>
+        </h3>
     </li>
     {% empty %}
     <li>
-      <li>No topics have been added yet.</li>    
+        <h3>
+          <li>No topics have been added yet.</li>    
+        </h3>
     </li>
     {% endfor %}
 </ul>
-<a href="{% url 'learning_logs:new_topic'%}">Add a new topic</a>
+<h3>
+    <a href="{% url 'learning_logs:new_topic'%}">Add a new topic</a>
+</h3>
 
 {% endblock content %}
