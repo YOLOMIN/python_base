@@ -1,63 +1,220 @@
-# python_base
-建立虚拟环境
-$ python3 -m venv 11_env
+# 第一章：Python基本语法和数据类型
 
-激活虚拟环境
-[lss@lss-pc ~]$ source 11_env/bin/activate
+## 1.1 Python简介
 
-关闭虚拟环境
-(11_env) [lss@lss-pc ~]$ deactivate 
+Python是一种通用、高级的编程语言，以其简洁、清晰的语法而著称。它由吉多·范·罗苏姆（Guido van Rossum）于1989年创建，旨在提供一种易于阅读和编写的代码。Python被广泛用于数据科学、人工智能、网站开发等领域。
 
-安装Django
-(11_env) [lss@lss-pc ~]$ pip install django
-如果提示网络不可达，则可以指定源安装
-(11_env) [lss@lss-pc Django]$ pip install django -i https://pypi.mirrors.ustc.edu.cn/simple/
+## 1.2 Python的基本语法
 
-在Django中创建项目：
-(11_env) [lss@lss-pc ~]$ django-admin startproject learning_log .
+### 1.2.1 注释
 
-创建数据库:
-(11_env) [lss@lss-pc ~]$ python3 manage.py migrate
+在Python中，注释以 `#` 开头，用于在代码中添加注解，不会被解释器执行。
 
+```python
+# 这是一个单行注释
 
-查看项目：---运行项目
-(11_env) [lss@lss-pc ~]$ python3 manage.py runserver
+"""
+这是一个多行注释
+可以在多行之间写入详细的注解
+"""
+```
 
+### 1.2.2 缩进
 
-创建应用程序
-(11_env) [lss@lss-pc ~]$ python3 manage.py startapp learning_logs
+Python使用缩进来表示代码块，通常使用四个空格作为一个缩进层级。
 
+```python
+if True:
+print("这是一个缩进的代码块")
+```
 
-定义模型
-(11_env) [lss@lss-pc ~]$ vim ./learning_logs/models.py
+### 1.2.3 变量和数据类型
 
+Python中的变量可以存储各种类型的数据，包括整数、浮点数、字符串等。
 
-(11_env) [lss@lss-pc ~]$ cat ./learning_logs/models.py
-from django.db import models
+```python
+x = 10 # 整数
+y = 3.14 # 浮点数
+name = "John" # 字符串
+is_valid = True # 布尔值
+```
 
-# Create your models here.
-class Topic(models.Model):
-#用户学习的主题
-text = models.CharField(max_length=200)
-date_added = models.DateTimeField(auto_now_add=True)
+### 1.2.4 基本运算符
 
-def __str__(self):
-#返回模型的字符串表示
-return self.text
+Python提供了各种运算符，包括算术运算符（`+`, `-`, `*`, `/`）、比较运算符（`==`, `!=`, `>`, `<`）、逻辑运算符（`and`, `or`, `not`）等。
 
-激活模型
+```python
+a = 10
+b = 5
+sum = a + b # 加法运算
+difference = a - b # 减法运算
+product = a * b # 乘法运算
+quotient = a / b # 除法运算
+```
 
-修改数据库
-(11_env) [lss@lss-pc Django]$ python3 manage.py makemigrations learning_logs
-(11_env) [lss@lss-pc Django]$ python3 manage.py migrate
+## 1.3 Python的数据类型
 
-Django管理网站
-创建超级用户
-(11_env) [lss@lss-pc Django]$ python3 manage.py  createsuperuser
+Python提供了多种内置数据类型，包括整数、浮点数、字符串、布尔值、列表、元组、字典等。
 
-迁移模型Entry
+### 1.3.1 整数（int）
 
-(11_env) [lss@lss-pc Django]$ python3 manage.py makemigrations learning_logs
-(11_env) [lss@lss-pc Django]$ python3 manage.py migrate
+整数是没有小数部分的数字，可以是正数、负数或零。
 
-步骤：修改models.py，执行python3 manage.py makemigrations learning_logs然后 python3 manage.py migrate
+```python
+x = 10
+y = -5
+```
+
+### 1.3.2 浮点数（float）
+
+浮点数是带有小数点的数字。
+
+```python
+pi = 3.14
+```
+
+### 1.3.3 字符串（str）
+
+字符串是由字符组成的文本，可以用单引号或双引号括起来。
+
+```python
+name = 'John'
+message = "Hello, World!"
+```
+
+### 1.3.4 布尔值（bool）
+
+布尔值表示真或假，只有两个取值：`True` 和 `False`。
+
+```python
+is_valid = True
+is_error = False
+```
+
+### 1.3.5 列表（list）
+
+列表是一种有序的集合，可以包含不同类型的元素。
+
+```python
+my_list = [1, 2, 3, "hello", True]
+```
+
+### 1.3.6 元组（tuple）
+
+元组是不可变的有序集合，一旦创建就不能被修改。
+
+```python
+my_tuple = (1, 2, 3, "world", False)
+```
+
+### 1.3.7 字典（dict）
+
+字典是无序的键值对集合，用于存储相关数据。
+
+```python
+person = {'name': 'John', 'age': 30, 'city': 'New York'}
+```
+
+## 1.4 总结
+
+本章介绍了Python的基本语法和数据类型，包括注释、缩进、变量、基本运算符以及整数、浮点数、字符串、布尔值等基本数据类型。在后续章节中，我们将深入学习如何使用这些基础知识来构建更复杂的程序和应用。
+
+（注：本教程基于Python 3.x 版本）
+
+# 第二章：Python控制流程
+
+## 2.1 条件语句
+
+### 2.1.1 if语句
+
+`if` 语句用于在条件满足时执行特定的代码块。
+
+```python
+if condition:
+# 如果条件为真，执行这里的代码
+else:
+# 如果条件为假，执行这里的代码
+```
+
+### 2.1.2 elif语句
+
+`elif` 语句用于在多个条件之间进行选择。
+
+```python
+if condition1:
+# 如果条件1为真，执行这里的代码
+elif condition2:
+# 如果条件2为真，执行这里的代码
+else:
+# 如果所有条件都为假，执行这里的代码
+```
+
+### 2.1.3 嵌套条件语句
+
+条件语句可以嵌套在其他条件语句中，以实现更复杂的逻辑。
+
+```python
+if condition1:
+if condition2:
+# 如果条件1和条件2都为真，执行这里的代码
+else:
+# 如果条件1为真，条件2为假，执行这里的代码
+else:
+# 如果条件1为假，执行这里的代码
+```
+
+## 2.2 循环语句
+
+### 2.2.1 for循环
+
+`for` 循环用于迭代遍历一个序列（如列表、元组等）中的元素。
+
+```python
+for item in sequence:
+# 对序列中的每个元素执行这里的代码
+```
+
+### 2.2.2 while循环
+
+`while` 循环用于在条件满足的情况下重复执行代码块。
+
+```python
+while condition:
+# 当条件为真时，执行这里的代码
+```
+
+### 2.2.3 循环控制语句
+
+在循环中，可以使用控制语句来改变程序的执行流程：
+
+- `break`：用于终止循环，跳出循环体。
+- `continue`：用于跳过当前循环的剩余代码，进入下一次循环迭代。
+
+## 2.3 示例代码
+
+以下是一个简单的示例代码，演示了条件语句和循环语句的使用：
+
+```python
+# 条件语句示例
+num = 10
+if num > 0:
+print("num是正数")
+elif num == 0:
+print("num是零")
+else:
+print("num是负数")
+
+# for循环示例
+for i in range(5):
+print(i)
+
+# while循环示例
+count = 0
+while count < 5:
+print(count)
+count += 1
+```
+
+## 2.4 总结
+
+本章介绍了Python中的控制流程，包括条件语句（if、elif、else）和循环语句（for、while），以及循环控制语句（break、continue）。这些语句使得程序能够根据条件执行不同的代码块，或者在满足条件的情况下重复执行特定的代码块。掌握这些基本的控制流程是编写复杂程序的重要基础。
