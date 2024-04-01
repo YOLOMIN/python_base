@@ -218,3 +218,297 @@ count += 1
 ## 2.4 总结
 
 本章介绍了Python中的控制流程，包括条件语句（if、elif、else）和循环语句（for、while），以及循环控制语句（break、continue）。这些语句使得程序能够根据条件执行不同的代码块，或者在满足条件的情况下重复执行特定的代码块。掌握这些基本的控制流程是编写复杂程序的重要基础。
+
+# 第三章：Python数据结构
+
+## 3.1 列表（List）
+
+列表是一种有序的集合，可以包含不同类型的元素。
+
+### 3.1.1 创建列表
+
+```python
+my_list = [1, 2, 3, "hello", True]
+```
+
+### 3.1.2 访问列表元素
+
+```python
+print(my_list[0])  # 输出第一个元素
+print(my_list[2:4])  # 输出第三和第四个元素
+```
+
+### 3.1.3 修改列表
+
+```python
+my_list[0] = 10  # 将第一个元素修改为10
+```
+
+### 3.1.4 添加元素
+
+```python
+my_list.append(4)  # 在列表末尾添加一个元素
+```
+
+## 3.2 元组（Tuple）
+
+元组是不可变的有序集合，一旦创建就不能被修改。
+
+### 3.2.1 创建元组
+
+```python
+my_tuple = (1, 2, 3, "world", False)
+```
+
+### 3.2.2 访问元组元素
+
+```python
+print(my_tuple[1])  # 输出第二个元素
+```
+
+### 3.2.3 尝试修改元组（会报错）
+
+```python
+my_tuple[0] = 10  # 尝试修改第一个元素（会报错）
+```
+
+## 3.3 字典（Dictionary）
+
+字典是无序的键值对集合，用于存储相关数据。
+
+### 3.3.1 创建字典
+
+```python
+person = {'name': 'John', 'age': 30, 'city': 'New York'}
+```
+
+### 3.3.2 访问字典元素
+
+```python
+print(person['name'])  # 输出'name'对应的值
+```
+
+### 3.3.3 修改字典
+
+```python
+person['age'] = 31  # 将'age'的值修改为31
+```
+
+### 3.3.4 添加新键值对
+
+```python
+person['gender'] = 'Male'  # 添加新的键值对
+```
+
+## 3.4 集合（Set）
+
+集合是无序、不重复的元素集合。
+
+### 3.4.1 创建集合
+
+```python
+my_set = {1, 2, 3, 4, 5}
+```
+
+### 3.4.2 操作集合
+
+```python
+my_set.add(6)  # 添加元素6
+my_set.remove(3)  # 移除元素3
+```
+
+## 3.5 总结
+
+本章介绍了Python中常用的数据结构，包括列表、元组、字典和集合。掌握这些数据结构将使你能够有效地组织和处理数据，为解决实际问题提供了强大的工具。在实际编程中，根据具体的需求选择合适的数据结构至关重要。
+
+# 第四章：Python函数
+
+## 4.1 什么是函数
+
+函数是一段可重复使用的代码块，用于执行特定任务或计算特定值。
+
+## 4.2 函数的定义与调用
+
+### 4.2.1 定义函数
+
+```python
+def greet(name):
+    print(f"Hello, {name}!")
+```
+
+### 4.2.2 调用函数
+
+```python
+greet("John")  # 输出: Hello, John!
+```
+
+## 4.3 函数参数
+
+### 4.3.1 位置参数
+
+```python
+def add(x, y):
+    return x + y
+```
+
+### 4.3.2 关键字参数
+
+```python
+def person_info(name, age, city):
+    print(f"Name: {name}, Age: {age}, City: {city}")
+```
+
+### 4.3.3 默认参数
+
+```python
+def greet(name="Guest"):
+    print(f"Hello, {name}!")
+```
+
+## 4.4 返回值
+
+```python
+def square(x):
+    return x ** 2
+```
+
+## 4.5 变量作用域
+
+### 4.5.1 局部变量
+
+```python
+def my_function():
+    x = 10
+    print(x)
+```
+
+### 4.5.2 全局变量
+
+```python
+x = 10
+
+def my_function():
+    print(x)
+```
+
+## 4.6 Lambda函数
+
+Lambda函数是一种匿名函数，用于简单的、短期的操作。
+
+```python
+square = lambda x: x ** 2
+```
+
+## 4.7 递归函数
+
+递归函数是指在函数内部调用函数本身的函数。
+
+```python
+def factorial(n):
+    if n == 0:
+        return 1
+    else:
+        return n * factorial(n-1)
+```
+
+## 4.8 总结
+
+本章介绍了Python中的函数，包括函数的定义与调用、函数参数、返回值、变量作用域、Lambda函数和递归函数等内容。函数是程序中组织和复用代码的重要方式，通过合理地使用函数，可以使代码更加模块化和可维护。在实际开发中，良好的函数设计是写出高效、清晰的程序的关键。
+
+
+# 第五章：Python模块和包
+
+## 5.1 什么是模块
+
+模块是包含Python定义和声明的文件，其文件名就是模块名加上`.py`后缀。
+
+## 5.2 导入模块
+
+### 5.2.1 导入整个模块
+
+```python
+import module_name
+```
+
+### 5.2.2 导入模块中的特定内容
+
+```python
+from module_name import function_name
+```
+
+### 5.2.3 给模块起别名
+
+```python
+import module_name as alias
+```
+
+## 5.3 创建自定义模块
+
+1. 创建一个新的`.py`文件，编写函数和变量。
+2. 在其他Python文件中使用 `import` 导入模块。
+
+## 5.4 包（Packages）
+
+包是一个包含多个模块的目录，必须包含一个`__init__.py`文件。
+
+## 5.5 导入包
+
+### 5.5.1 导入包中的单个模块
+
+```python
+from package_name import module_name
+```
+
+### 5.5.2 导入包中的子包
+
+```python
+from package_name.subpackage import module_name
+```
+
+## 5.6 创建自定义包
+
+1. 创建一个目录，目录名就是包名。
+2. 在目录中创建模块文件和`__init__.py`文件。
+
+## 5.7 使用`__init__.py`
+
+`__init__.py` 文件可以为空，也可以包含有效的Python代码，用于在导入包时执行初始化操作。
+
+## 5.8 示例
+
+假设我们有一个名为 `math_operations` 的包，包含了 `addition.py` 和 `subtraction.py` 两个模块。
+
+```
+math_operations/
+    __init__.py
+    addition.py
+    subtraction.py
+```
+
+`addition.py` 模块：
+
+```python
+def add(x, y):
+    return x + y
+```
+
+`subtraction.py` 模块：
+
+```python
+def subtract(x, y):
+    return x - y
+```
+
+在其他Python文件中可以这样使用：
+
+```python
+from math_operations.addition import add
+from math_operations.subtraction import subtract
+
+print(add(5, 3))  # 输出: 8
+print(subtract(5, 3))  # 输出: 2
+```
+
+## 5.9 总结
+
+本章介绍了Python中的模块和包的概念，包括如何导入模块、创建自定义模块和包、以及如何使用`__init__.py`文件进行初始化操作。模块和包是Python代码组织和复用的重要工具，合理地使用它们可以使代码更加清晰、模块化和可维护。
